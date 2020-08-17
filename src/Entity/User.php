@@ -4,6 +4,7 @@ namespace App\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * User
@@ -11,7 +12,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table(name="user")
  * @ORM\Entity
  */
-class User
+class User implements UserInterface
 {
     /**
      * @var int
@@ -25,44 +26,44 @@ class User
     /**
      * @var string|null
      *
-     * @ORM\Column(name="role", type="string", length=50, nullable=true, options={"default"="NULL"})
+     * @ORM\Column(name="role", type="string", length=50, nullable=true, options={"default"=""})
      */
-    private $role = 'NULL';
+    private $role = '';
 
     /**
      * @var string|null
      *
-     * @ORM\Column(name="name", type="string", length=100, nullable=true, options={"default"="NULL"})
+     * @ORM\Column(name="name", type="string", length=100, nullable=true, options={"default"=""})
      */
-    private $name = 'NULL';
+    private $name = '';
 
     /**
      * @var string|null
      *
-     * @ORM\Column(name="surname", type="string", length=250, nullable=true, options={"default"="NULL"})
+     * @ORM\Column(name="surname", type="string", length=250, nullable=true, options={"default"=""})
      */
-    private $surname = 'NULL';
+    private $surname = '';
 
     /**
      * @var string|null
      *
-     * @ORM\Column(name="email", type="string", length=250, nullable=true, options={"default"="NULL"})
+     * @ORM\Column(name="email", type="string", length=250, nullable=true, options={"default"=""})
      */
-    private $email = 'NULL';
+    private $email = '';
 
     /**
      * @var string|null
      *
-     * @ORM\Column(name="password", type="string", length=250, nullable=true, options={"default"="NULL"})
+     * @ORM\Column(name="password", type="string", length=250, nullable=true, options={"default"=""})
      */
-    private $password = 'NULL';
+    private $password = '';
 
     /**
      * @var \DateTime|null
      *
-     * @ORM\Column(name="created_at", type="datetime", nullable=true, options={"default"="NULL"})
+     * @ORM\Column(name="created_at", type="datetime", nullable=true, options={"default"=""})
      */
-    private $createdAt = 'NULL';
+    private $createdAt = '';
 
     /**
      * @var ArrayCollection
@@ -160,4 +161,56 @@ class User
     }
 
 
+    /**
+     * Returns the roles granted to the user.
+     *
+     *     public function getRoles()
+     *     {
+     *         return ['ROLE_USER'];
+     *     }
+     *
+     * Alternatively, the roles might be stored on a ``roles`` property,
+     * and populated in any number of different ways when the user object
+     * is created.
+     *
+     * @return (Role|string)[] The user roles
+     */
+    public function getRoles()
+    {
+        return array("ROLE_USER");  // estático
+        return $this->getRoles();   // dinámico
+    }
+
+    /**
+     * Returns the salt that was originally used to encode the password.
+     *
+     * This can return null if the password was not encoded using a salt.
+     *
+     * @return string|null The salt
+     */
+    public function getSalt()
+    {
+        return null;
+    }
+
+    /**
+     * Returns the username used to authenticate the user.
+     *
+     * @return string The username
+     */
+    public function getUsername()
+    {
+        return $this->email;
+    }
+
+    /**
+     * Removes sensitive data from the user.
+     *
+     * This is important if, at any given point, sensitive information like
+     * the plain-text password is stored on this object.
+     */
+    public function eraseCredentials()
+    {
+        // TODO: Implement eraseCredentials() method.
+    }
 }
