@@ -2,11 +2,53 @@ body {
     background: white;
 }
 
+.clearfix {
+    float:none;
+    clear:both;
+}
+
 .example-wrapper {
     margin: 1em auto;
     max-width: 800px;
     width: 95%;
     font: 18px/1.5 sans-serif;
+}
+#header {
+    margin: 1em auto;
+    max-width: 800px;
+    width: 95%;
+    font: 18px/1.5 sans-serif;
+}
+
+#menu {
+    list-style: none;
+    margin: 0px;
+    padding: 0px;
+    width: 100%;
+    height: 40px;
+    line-height: 40px;
+    background: #eee;
+}
+#menu li {
+    float:left;
+    display: block;
+    padding-left: 15px;
+    padding-right: 15px;
+    border-right: 1px solid #ccc;
+    cursor: pointer;
+    transition: all 300ms;
+}
+#menu li:hover {
+    background: #444;
+}
+#menu a {
+    text-decoration: none;
+    color: #444;
+    display: block;
+    transition: all 300ms;
+}
+#menu li:hover a {
+    color: white;
 }
 
 .example-wrapper code {
