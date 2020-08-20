@@ -20,6 +20,7 @@ class TaskController extends AbstractController
         $tasks = $task_repo->findAll();
         */
 
+        /*
         $user_repo = $this->getDoctrine()->getRepository(User::class);
         $users = $user_repo->findAll();
         foreach ($users as $user) {
@@ -28,7 +29,7 @@ class TaskController extends AbstractController
                 echo "<H2>{$task->getTitle()}</H2>";
             }
         }
-
+        */
 
         return $this->render('task/index.html.twig', [
             'controller_name' => 'TaskController',
