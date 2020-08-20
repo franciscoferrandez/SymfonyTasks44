@@ -95,3 +95,46 @@ input[type="submit"]:hover
 {
     background: #047425;
 }
+
+
+table {
+    width: 100%;
+}
+table th,
+table td{
+    background: #f6f6f6;
+    padding: 15px;
+    border-bottom: 1px solid #eee;
+    padding-left: 25px;
+    padding-right: 25px;
+}
+table td {
+    background: #e9ffea;
+}
+
+table td.buttons a {
+    text-decoration: none;
+    border: 1px solid #444;
+    padding: 10px;
+    color: white;
+    background: silver;
+}
+
+.buttons a.btn-view {
+    background: #00aa33;
+    border: 1px solid darkgreen;
+}
+
+.buttons a.btn-delete {
+    background: red;
+    border: 1px solid darkred;
+}
+
+.buttons a.btn-edit {
+    background: orange;
+    border: 1px solid darkorange;
+}
+
+p.data-task {
+    color: gray;
+}

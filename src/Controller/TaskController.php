@@ -4,6 +4,8 @@ namespace App\Controller;
 
 use App\Entity\Task;
 use App\Entity\User;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -15,10 +17,11 @@ class TaskController extends AbstractController
     public function index()
     {
         $em = $this->getDoctrine()->getManager();
-        /*
+
         $task_repo = $this->getDoctrine()->getRepository(Task::class);
-        $tasks = $task_repo->findAll();
-        */
+        //$tasks = $task_repo->findAll();
+        $tasks = $task_repo->findBy([],['id' => 'DESC']);
+
 
         /*
         $user_repo = $this->getDoctrine()->getRepository(User::class);
@@ -32,7 +35,31 @@ class TaskController extends AbstractController
         */
 
         return $this->render('task/index.html.twig', [
-            'controller_name' => 'TaskController',
+            'tasks' => $tasks,
         ]);
+    }
+
+    /**
+     * @Route("/task/view/{id}", name="task")
+     */
+    public function task(Task $task)
+    {
+        if (!$task) {
+            return $this->redirectToRoute("tasks");
+        }
+
+        return $this->render('task/detail.html.twig', array(
+            'task' => $task
+        ));
+    }
+
+    /**
+     * @Route("/task/create", name="task_create")
+     */
+    public function create(Request $request)
+    {
+        return $this->render('task/create.html.twig', array(
+
+        ));
     }
 }
