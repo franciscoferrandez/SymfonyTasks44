@@ -7,26 +7,6 @@
 <div class="example-wrapper">
     <h2>Todas las tareas ✅</h2>
 
-    <table>
-        <tr>
-            <th>Tarea</th>
-            <th>Prioridad</th>
-            <th>Horas</th>
-            <th>Acciones</th>
-        </tr>
-
-        {% for task in tasks %}
-            <tr>
-                <td>{{ task.title }}</td>
-                <td>{{task.priority}}</td>
-                <td>{{task.hours}}</td>
-                <td class="buttons">
-                    <a href="{{ path('task', {'id':task.id}) }}" class="btn-view">Ver</a>
-                    <a href="" class="btn-edit">Editar</a>
-                    <a href="" class="btn-delete">Borrar</a>
-                </td>
-            </tr>
-        {% endfor %}
-    </table>
+    {{ include('includes/tasks-list.html.twig') }}
 </div>
 {% endblock %}

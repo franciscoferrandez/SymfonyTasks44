@@ -42,6 +42,18 @@ class TaskController extends AbstractController
     }
 
     /**
+     * @Route("/tasks/mine", name="tasks_mine")
+     */
+    public function myTasks(UserInterface $user)
+    {
+        $tasks = $user->getTasks();
+
+        return $this->render('task/index.html.twig', [
+            'tasks' => $tasks,
+        ]);
+    }
+
+    /**
      * @Route("/task/view/{id}", name="task")
      */
     public function task(Task $task)
