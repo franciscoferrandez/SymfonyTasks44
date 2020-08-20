@@ -31,16 +31,16 @@ class Task
     /**
      * @var string|null
      *
-     * @ORM\Column(name="content", type="text", length=65535, nullable=true, options={"default"="NULL"})
+     * @ORM\Column(name="content", type="text", length=65535, nullable=true, options={"default"=""})
      */
-    private $content = 'NULL';
+    private $content = '';
 
     /**
      * @var string|null
      *
-     * @ORM\Column(name="priority", type="string", length=50, nullable=true, options={"default"="NULL"})
+     * @ORM\Column(name="priority", type="string", length=50, nullable=true, options={"default"="MEDIUM"})
      */
-    private $priority = 'NULL';
+    private $priority = 'MEDIUM';
 
     /**
      * @var int|null
