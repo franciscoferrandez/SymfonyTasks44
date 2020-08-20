@@ -4,10 +4,13 @@ namespace App\Controller;
 
 use App\Entity\Task;
 use App\Entity\User;
+use Cassandra\Date;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
+use App\Form\TaskType;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 class TaskController extends AbstractController
 {
@@ -56,10 +59,29 @@ class TaskController extends AbstractController
     /**
      * @Route("/task/create", name="task_create")
      */
-    public function create(Request $request)
+    public function create(Request $request, UserInterface $user)
     {
-        return $this->render('task/create.html.twig', array(
+        $task = new Task();
+        $form = $this->createForm(TaskType::class, $task);
 
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $task->setCreatedAt(new \DateTime());
+            $task->setUser($user);
+
+            dump($task);
+
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($task);
+            $em->flush();
+
+            return $this->redirect(
+                $this->generateUrl("task", ['id' => $task->getId()])
+            );
+        }
+
+        return $this->render('task/create.html.twig', array(
+            'form' => $form->createView()
         ));
     }
 }

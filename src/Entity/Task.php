@@ -45,9 +45,9 @@ class Task
     /**
      * @var int|null
      *
-     * @ORM\Column(name="hours", type="integer", nullable=true, options={"default"="NULL"})
+     * @ORM\Column(name="hours", type="integer", nullable=true)
      */
-    private $hours = 'NULL';
+    private $hours = null;
 
     /**
      * @var \DateTime|null

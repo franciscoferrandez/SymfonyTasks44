@@ -73,9 +73,11 @@ label {
 
 input[type="text"],
 input[type="password"],
-input[type="email"]
+input[type="email"],
+textarea,
+select
 {
-    width: 80%;
+    width: 70%;
     padding: 8px;
 }
 
@@ -118,6 +120,10 @@ table td.buttons a {
     padding: 10px;
     color: white;
     background: silver;
+}
+
+.buttons {
+    width: 33%;
 }
 
 .buttons a.btn-view {
