@@ -95,4 +95,37 @@ class TaskController extends AbstractController
             'form' => $form->createView()
         ));
     }
+
+    /**
+     * @Route("/task/edit/{id}", name="task_edit")
+     */
+    public function edit(Request $request, UserInterface $user, Task $task)
+    {
+        if ($user && $user->getId() != $task->getUser()->getId()) {
+            return $this->redirectToRoute("tasks");
+        }
+
+        $form = $this->createForm(TaskType::class, $task);
+
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            //$task->setCreatedAt(new \DateTime());
+            //$task->setUser($user);
+
+            dump($task);
+
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($task);
+            $em->flush();
+
+            return $this->redirect(
+                $this->generateUrl("task", ['id' => $task->getId()])
+            );
+        }
+
+        return $this->render('task/create.html.twig', array(
+            'form' => $form->createView(),
+            'edit' => true
+        ));
+    }
 }
