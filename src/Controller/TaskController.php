@@ -11,6 +11,9 @@ use Symfony\Component\Routing\Annotation\Route;
 use App\Form\TaskType;
 use Symfony\Component\Security\Core\User\UserInterface;
 
+/**
+ * @Route("/backend")
+ */
 class TaskController extends AbstractController
 {
     /**
