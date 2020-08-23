@@ -21,6 +21,8 @@ class TaskController extends AbstractController
      */
     public function index()
     {
+        $this->denyAccessUnlessGranted('ROLE_ADMIN');
+
         $em = $this->getDoctrine()->getManager();
 
         $task_repo = $this->getDoctrine()->getRepository(Task::class);
@@ -105,7 +107,8 @@ class TaskController extends AbstractController
     public function edit(Request $request, UserInterface $user, Task $task)
     {
         if ($user && $user->getId() != $task->getUser()->getId()) {
-            return $this->redirectToRoute("tasks");
+            $this->denyAccessUnlessGranted('ROLE_ADMIN');
+            //return $this->redirectToRoute("tasks");
         }
 
         $form = $this->createForm(TaskType::class, $task);
@@ -137,7 +140,8 @@ class TaskController extends AbstractController
      */
     public function delete (Task $task, UserInterface $user) {
         if (!$task || !$user || ($user->getId() != $task->getUser()->getId())) {
-            return $this->redirectToRoute("tasks");
+            $this->denyAccessUnlessGranted('ROLE_ADMIN');
+            //return $this->redirectToRoute("tasks");
         }
 
         $em = $this->getDoctrine()->getManager();

@@ -1,0 +1,24 @@
+<table>
+    <tr>
+        <th>Nombre</th>
+        <th>Rol</th>
+        <th>Email</th>
+        <th>Acciones</th>
+    </tr>
+
+    {% for user in users %}
+        <tr>
+            <td>{{ user.name ~ ' ' ~ user.surname|trim }}</td>
+            <td>{{ user.role }}</td>
+            <td>{{ user.email }}</td>
+            <td class="buttons">
+                {% if (app.user != null and user.id == app.user.id) or (is_granted('ROLE_ADMIN')) %}
+                    <a href="{{ path('user_edit', {'id':user.id}) }}" class="btn-edit">Editar</a>
+                {% endif %}
+                {% if (app.user != null and user.id != app.user.id) and (is_granted('ROLE_ADMIN')) %}
+                    <a href="{{ path('user_delete', {'id':user.id}) }}" class="btn-delete">Borrar</a>
+                {% endif %}
+            </td>
+        </tr>
+    {% endfor %}
+</table>

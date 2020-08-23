@@ -23,7 +23,7 @@ security:
                 check_path: login
                 provider: proveedor_login
                 # failure_path: login_failure_route_name
-                default_target_path: tasks
+                default_target_path: tasks_mine
                 always_use_default_target_path: true
 
             logout:
@@ -39,5 +39,10 @@ security:
     # Easy way to control access for large sections of your site
     # Note: Only the *first* access control that matches will be used
     access_control:
-        - { path: ^/backend, roles: ROLE_USER }
+        - { path: ^/backend, roles: [ROLE_ADMIN,ROLE_USER] }
         # - { path: ^/profile, roles: ROLE_USER }
+
+    # jerarquía de roles básica
+    role_hierarchy:
+        ROLE_ADMIN:       ROLE_USER
+        ROLE_SUPER_ADMIN: [ROLE_ADMIN, ROLE_ALLOWED_TO_SWITCH]

@@ -1,11 +1,21 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Todas las tareas{% endblock %}
+{% block title %}
+    {% if current_route_name == 'tasks_mine' %}
+        Mis tareas
+    {% else %}
+        Todas las tareas
+    {% endif %}
+{% endblock %}
 
 {% block body %}
 
 <div class="example-wrapper">
-    <h2>Todas las tareas ✅</h2>
+    <h2>{% if current_route_name == 'tasks_mine' %}
+            Mis tareas
+        {% else %}
+            Todas las tareas
+        {% endif %} ✅</h2>
 
     {{ include('includes/tasks-list.html.twig') }}
 </div>

@@ -177,8 +177,8 @@ class User implements UserInterface
      */
     public function getRoles()
     {
-        return array("ROLE_USER");  // estático
-        return $this->getRoles();   // dinámico
+        //return array("ROLE_USER");  // estático
+        return array($this->getRole());   // dinámico
     }
 
     /**

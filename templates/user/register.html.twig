@@ -1,6 +1,12 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Registro de usuarios{% endblock %}
+{% block title %}
+    {% if edit is defined %}
+        Perfil de usuario
+    {% else %}
+        Registro de usuarios
+    {% endif %}
+{% endblock %}
 
 {% block body %}
 <style>
@@ -9,7 +15,13 @@
 </style>
 
 <div class="example-wrapper">
-    <h2>Registro de usuarios ✅</h2>
+    <h2>
+        {% if edit is defined %}
+            Perfil de usuario
+        {% else %}
+            Registro de usuarios
+        {% endif %}
+        ✅</h2>
     {{ form_start(form) }}
     {{ form_widget(form) }}
     {{ form_end(form) }}

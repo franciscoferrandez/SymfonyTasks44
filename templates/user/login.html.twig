@@ -17,10 +17,6 @@
         </div>
     {% endif %}
 
-    {% if app.user %}
-        {{ dump(app.user) }}
-    {% endif %}
-
     <form action="{{ path('login') }}" method="post">
         <label for="username">Email</label>
         <input type="email" name="_username" id="username" value="{{ last_username }}" />

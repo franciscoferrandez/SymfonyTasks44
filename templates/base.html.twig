@@ -1,32 +1,36 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="UTF-8">
-        <title>{% block title %}Welcome!{% endblock %}</title>
-        {% block stylesheets %}
-        <link href="{{ asset('assets/css/style.css') }}" type="text/css" rel="stylesheet" />
-        {% endblock %}
-    </head>
-    <body>
-        {% block header %}
-            <div id="header">
-                <h1>Tareas Symfony</h1>
-                <ul id="menu">
-                    {% if app.user %}
-                        <li><a href="{{ path("tasks") }}">Inicio</a> </li>
-                        <li><a href="{{ path("tasks_mine") }}">Mis Tareas</a> </li>
-                        <li><a href="{{ path("task_create") }}">Nueva</a> </li>
-                        <li class="right"><a href="{{ path("logout") }}">Logout</a> </li>
-                        <li class="right"><a href="#">{{ app.user.surname ~ ', ' ~ app.user.name }}</a> </li>
-                    {% else %}
-                        <li><a href="{{ path("login") }}">Login</a> </li>
-                        <li><a href="{{ path("register") }}">Registro</a> </li>
-                    {% endif %}
-                </ul>
-            </div>
-            <div class="clearfix"></div>
-        {% endblock %}
-        {% block body %}{% endblock %}
-        {% block javascripts %}{% endblock %}
-    </body>
+{% set current_route_name = app.request.attributes.get('_route') %}
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Welcome!{% endblock %}</title>
+    {% block stylesheets %}
+        <link href="{{ asset('assets/css/style.css') }}" type="text/css" rel="stylesheet"/>
+    {% endblock %}
+</head>
+<body>
+{% block header %}
+    <div id="header">
+        <h1>Tareas Symfony <!-- ({{ current_route_name }}) --></h1>
+        <ul id="menu">
+            {% if app.user %}
+                <li><a href="{{ path("tasks_mine") }}">Mis Tareas</a></li>
+                <li><a href="{{ path("task_create") }}">+</a></li>
+                <li class="right"><a href="{{ path("logout") }}">Logout</a></li>
+                {% if is_granted('ROLE_ADMIN') %}
+                    <li class="right"><a href="{{ path("users") }}">Usuarios</a></li>
+                    <li class="right"><a href="{{ path("tasks") }}">Tareas</a></li>
+                {% endif %}
+                <li class="right"><a href="{{ path('user_edit', {'id':app.user.id}) }}">{{ app.user.name }}</a></li>
+            {% else %}
+                <li><a href="{{ path("login") }}">Login</a></li>
+                <li><a href="{{ path("register") }}">Registro</a></li>
+            {% endif %}
+        </ul>
+    </div>
+    <div class="clearfix"></div>
+{% endblock %}
+{% block body %}{% endblock %}
+{% block javascripts %}{% endblock %}
+</body>
 </html>
