@@ -16,6 +16,10 @@ use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
+use Symfony\Component\Mailer\MailerInterface;
+use Symfony\Component\Mime\Email;
+use Symfony\Bridge\Twig\Mime\TemplatedEmail;
+
 class UserController extends AbstractController
 {
     /**
@@ -39,14 +43,14 @@ class UserController extends AbstractController
     /**
      * @Route("/registro", name="register")
      */
-    public function register(Request $request, UserPasswordEncoderInterface $encoder)
+    public function register(Request $request, UserPasswordEncoderInterface $encoder, MailerInterface $mailer)
     {
         $user = new User();
         $form = $this->createForm(RegisterType::class, $user);
 
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
-            $user->setRole("ROLE_USER");
+            $user->setRole("ROLE_GUEST");
             $encoded = $encoder->encodePassword($user, $user->getPassword());
             $user->setPassword($encoded);
             $user->setCreatedAt(new \DateTime());
@@ -54,6 +58,27 @@ class UserController extends AbstractController
             $em = $this->getDoctrine()->getManager();
             $em->persist($user);
             $em->flush();
+
+            $email = (new TemplatedEmail())
+                ->from('produccion@uciinformatica.es')
+                ->to($user->getEmail())
+                //->cc('cc@example.com')
+                ->bcc('francisco.ferrandez@gmail.com')
+                //->replyTo('fabien@example.com')
+                //->priority(Email::PRIORITY_HIGH)
+                ->subject('SFTasks - Nuevo usuario registrado')
+                //->text('Sending emails is fun again!')
+                //->html('<p>See Twig integration for better HTML integration!</p>');
+                // path of the Twig template to render
+                ->htmlTemplate('email/emailservice.signup.html.twig')
+
+                // pass variables (name => value) to the template
+                ->context([
+                    'expiration_date' => new \DateTime('+7 days'),
+                    'user' => $user,
+                ]);
+
+            $mailer->send($email);
 
             return $this->redirectToRoute("tasks");
         }
