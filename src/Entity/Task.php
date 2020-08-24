@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Task
@@ -68,6 +69,7 @@ class Task
 
     /**
      * @ORM\Column(type="integer", options={"default"=0})
+     * @Assert\Choice({0, 10, 20, 30, 40})
      */
     private $status = 0;
 

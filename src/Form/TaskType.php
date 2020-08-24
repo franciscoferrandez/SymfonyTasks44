@@ -26,6 +26,16 @@ class TaskType extends AbstractType {
                 "Baja" => "LOW",
             )
         ));
+        $builder->add("status", ChoiceType::class, array(
+            "label" => "Estado",
+            "choices" => array(
+                "Inbox" => 0,
+                "Pendiente" => 10,
+                "En Curso" => 20,
+                "Revisión" => 30,
+                "Completado" => 40,
+            )
+        ));
         $builder->add("hours", TextType::class, array(
             "label" => "Horas"
         ));
