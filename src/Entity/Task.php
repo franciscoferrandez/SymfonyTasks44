@@ -52,9 +52,9 @@ class Task
     /**
      * @var \DateTime|null
      *
-     * @ORM\Column(name="created_at", type="datetime", nullable=true, options={"default"="NULL"})
+     * @ORM\Column(name="created_at", type="datetime", nullable=true, options={"default"=NULL})
      */
-    private $createdAt = 'NULL';
+    private $createdAt = NULL;
 
     /**
      * @var \User

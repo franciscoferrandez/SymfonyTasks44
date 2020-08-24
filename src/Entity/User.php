@@ -5,12 +5,15 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * User
  *
  * @ORM\Table(name="user")
  * @ORM\Entity
+ * @UniqueEntity("email")
  */
 class User implements UserInterface
 {
@@ -34,6 +37,8 @@ class User implements UserInterface
      * @var string|null
      *
      * @ORM\Column(name="name", type="string", length=100, nullable=true, options={"default"=""})
+     * @Assert\NotBlank
+     * @Assert\Regex("/[a-zA-Z ]+/")
      */
     private $name = '';
 
@@ -41,13 +46,20 @@ class User implements UserInterface
      * @var string|null
      *
      * @ORM\Column(name="surname", type="string", length=250, nullable=true, options={"default"=""})
+     * @Assert\NotBlank
+     * @Assert\Regex("/[a-zA-Z ]+/")
      */
     private $surname = '';
 
     /**
      * @var string|null
      *
-     * @ORM\Column(name="email", type="string", length=250, nullable=true, options={"default"=""})
+     * @ORM\Column(name="email", type="string", length=250, nullable=true, unique=true, options={"default"=""})
+     * @Assert\NotBlank
+     * @Assert\Email(
+     *     message = "El email '{{ value }}' no es válido",
+     *     checkMX = true
+     *     )
      */
     private $email = '';
 
@@ -55,15 +67,16 @@ class User implements UserInterface
      * @var string|null
      *
      * @ORM\Column(name="password", type="string", length=250, nullable=true, options={"default"=""})
+     * @Assert\NotBlank
      */
     private $password = '';
 
     /**
      * @var \DateTime|null
      *
-     * @ORM\Column(name="created_at", type="datetime", nullable=true, options={"default"=""})
+     * @ORM\Column(name="created_at", type="datetime", nullable=true, options={"default"=NULL})
      */
-    private $createdAt = '';
+    private $createdAt = null;
 
     /**
      * @var ArrayCollection

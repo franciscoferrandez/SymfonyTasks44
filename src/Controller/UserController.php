@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Service\CustomEmailService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -9,16 +10,10 @@ use App\Entity\User;
 use App\Form\RegisterType;
 
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
-
-use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
-
-use Symfony\Component\Mailer\MailerInterface;
-use Symfony\Component\Mime\Email;
-use Symfony\Bridge\Twig\Mime\TemplatedEmail;
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 class UserController extends AbstractController
 {
@@ -43,7 +38,7 @@ class UserController extends AbstractController
     /**
      * @Route("/registro", name="register")
      */
-    public function register(Request $request, UserPasswordEncoderInterface $encoder, MailerInterface $mailer)
+    public function register(Request $request, UserPasswordEncoderInterface $encoder, CustomEmailService $customEmailService)
     {
         $user = new User();
         $form = $this->createForm(RegisterType::class, $user);
@@ -59,26 +54,7 @@ class UserController extends AbstractController
             $em->persist($user);
             $em->flush();
 
-            $email = (new TemplatedEmail())
-                ->from('produccion@uciinformatica.es')
-                ->to($user->getEmail())
-                //->cc('cc@example.com')
-                ->bcc('francisco.ferrandez@gmail.com')
-                //->replyTo('fabien@example.com')
-                //->priority(Email::PRIORITY_HIGH)
-                ->subject('SFTasks - Nuevo usuario registrado')
-                //->text('Sending emails is fun again!')
-                //->html('<p>See Twig integration for better HTML integration!</p>');
-                // path of the Twig template to render
-                ->htmlTemplate('email/emailservice.signup.html.twig')
-
-                // pass variables (name => value) to the template
-                ->context([
-                    'expiration_date' => new \DateTime('+7 days'),
-                    'user' => $user,
-                ]);
-
-            $mailer->send($email);
+            $customEmailService->signUpEmail($user);
 
             return $this->redirectToRoute("tasks");
         }
@@ -94,8 +70,6 @@ class UserController extends AbstractController
      */
     public function edit(Request $request, UserInterface $user, User $user_edit)
     {
-        //dump($user_edit);
-
         if ($user && $user->getId() != $user_edit->getId()) {
             $this->denyAccessUnlessGranted('ROLE_ADMIN');
             //return $this->redirectToRoute("users");
