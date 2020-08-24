@@ -147,3 +147,46 @@ td.buttons {
 p.data-task {
     color: gray;
 }
+
+
+
+/* dropdown */
+.dropbtn {
+    display: inline-block;
+    text-decoration: none;
+    transition: all 500ms;
+}
+li.dropdown {
+    display: inline-block;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #444;
+    color: #444;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+    margin-left: -15px;
+    transition: all 500ms;
+}
+
+.dropdown-content a {
+    color: black;
+    padding-left: 15px;
+    padding-right: 15px;
+    line-height: 40px;
+    text-decoration: none;
+    display: block;
+    text-align: left;
+}
+
+.dropdown-content a:hover {background-color: #eee; color: #444!important;}
+
+.dropdown .dropdown-content {
+    transition: all 500ms;
+}
+.dropdown:hover .dropdown-content {
+    display: block;
+}
