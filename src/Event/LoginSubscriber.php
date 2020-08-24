@@ -32,14 +32,16 @@ class LoginSubscriber implements EventSubscriberInterface
         $user = $event->getAuthenticationToken()->getUser();
 
         // Update your field here.
-        //$user->setLastLogin(new \DateTime());
+        $user->setLastLogin(new \DateTime());
 
+        // si es el primer login del usuario, lo activamos (ponemos rol USER
         if (in_array("ROLE_GUEST", $user->getRoles())) {
             $user->setRole("ROLE_USER");
-            // Persist the data to database.
-            $this->entityManager->persist($user);
-            $this->entityManager->flush();
         }
+
+        // Persist the data to database.
+        $this->entityManager->persist($user);
+        $this->entityManager->flush();
 
     }
 

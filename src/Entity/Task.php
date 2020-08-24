@@ -66,6 +66,11 @@ class Task
      */
     private $user;
 
+    /**
+     * @ORM\Column(type="integer", options={"default"=0})
+     */
+    private $status = 0;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -139,6 +144,18 @@ class Task
     public function setUser(?User $user): self
     {
         $this->user = $user;
+
+        return $this;
+    }
+
+    public function getStatus(): ?int
+    {
+        return $this->status;
+    }
+
+    public function setStatus(int $status): self
+    {
+        $this->status = $status;
 
         return $this;
     }
