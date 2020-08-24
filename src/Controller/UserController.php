@@ -2,8 +2,10 @@
 
 namespace App\Controller;
 
+use App\Form\UserPasswordChangeType;
 use App\Service\CustomEmailService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Routing\Annotation\Route;
 
 use App\Entity\User;
@@ -64,6 +66,48 @@ class UserController extends AbstractController
         ]);
     }
 
+
+    /**
+     * @Route("/backend/user/password-change", name="user_password_change")
+     */
+    public function passwordChange(Request $request, UserPasswordEncoderInterface $encoder)
+    {
+
+        $form = $this->createForm(UserPasswordChangeType::class );
+
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $old_pwd = $request->request->get('user_password_change')['old_password'];
+            $new_pwd = $request->get('user_password_change')['password']['first'];
+            $new_pwd_confirm = $request->get('user_password_change')['password']['second'];
+
+            $user = $this->getUser();
+            $checkPass = $encoder->isPasswordValid($user, $old_pwd);
+
+            if($checkPass === true) {
+                $new_pwd_encoded = $encoder->encodePassword($user, $new_pwd_confirm);
+                $user->setPassword($new_pwd_encoded);
+
+                dump($new_pwd_confirm);
+
+                $em = $this->getDoctrine()->getManager();
+                $em->persist($user);
+                $em->flush();
+
+                return $this->redirectToRoute("home");
+            } else {
+                //return new jsonresponse(array('error' => 'The current password is incorrect.'));
+            }
+
+
+
+
+        }
+
+        return $this->render('user/register.html.twig', [
+            'form' => $form->createView(),
+        ]);
+    }
 
     /**
      * @Route("backend/user/edit/{id}", name="user_edit")

@@ -1,8 +1,10 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}
-    {% if edit is defined %}
+    {% if current_route_name == 'user_edit' %}
         Perfil de usuario
+    {% elseif current_route_name == 'user_password_change' %}
+        Cambio de contraseña
     {% else %}
         Registro de usuarios
     {% endif %}
@@ -11,8 +13,10 @@
 {% block body %}
 <div class="example-wrapper">
     <h2>
-        {% if edit is defined %}
+        {% if current_route_name == 'user_edit' %}
             Perfil de usuario
+        {% elseif current_route_name == 'user_password_change' %}
+            Cambio de contraseña
         {% else %}
             Registro de usuarios
         {% endif %}
