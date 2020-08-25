@@ -13,6 +13,9 @@ use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
+use Symfony\Component\Validator\Constraints\NotBlank;
+use Symfony\Component\Validator\Constraints\Length;
+
 class UserPasswordChangeType extends AbstractType
 {
 
@@ -30,6 +33,10 @@ class UserPasswordChangeType extends AbstractType
             'required' => true,
             'first_options' => ['label' => 'Password'],
             'second_options' => ['label' => 'Repeat Password'],
+            'constraints' => [
+                new NotBlank(),
+                new Length(['min' => 8]),
+            ],
         ]);
 
         $builder->add("submit", SubmitType::class, array(

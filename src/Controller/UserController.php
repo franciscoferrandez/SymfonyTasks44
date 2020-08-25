@@ -96,7 +96,10 @@ class UserController extends AbstractController
 
                 return $this->redirectToRoute("home");
             } else {
-                //return new jsonresponse(array('error' => 'The current password is incorrect.'));
+                $this->addFlash(
+                    'error',
+                    'El password actual no es válido'
+                );
             }
 
 
