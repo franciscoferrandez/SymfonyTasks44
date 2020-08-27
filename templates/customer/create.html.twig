@@ -2,9 +2,9 @@
 
 {% block title %}
     {% if edit is defined %}
-        {% trans %}Edit Task{% endtrans %}
+        {% trans %}Edit Customer{% endtrans %}
     {% else %}
-        {% trans %}New Task{% endtrans %}
+        {% trans %}New Customer{% endtrans %}
     {% endif %}
 {% endblock %}
 
@@ -12,9 +12,9 @@
 
 <div class="example-wrapper">
     {% if edit is defined %}
-        <h2>{% trans %}Edit Task{% endtrans %} ✅</h2>
+        <h2>{% trans %}Edit Customer{% endtrans %} ✅</h2>
     {% else %}
-        <h2>{% trans %}New Task{% endtrans %} ✅</h2>
+        <h2>{% trans %}New Customer{% endtrans %} ✅</h2>
     {% endif %}
 
     {{ form_start(form) }}

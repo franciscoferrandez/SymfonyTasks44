@@ -100,19 +100,35 @@ select
     padding: 8px;
 }
 
+a.button,
 button,
-input[type="submit"]
+input [type="submit"]
 {
     padding: 8px;
-    margin-top: 15px;
-    background: #00aa33;
+    background: darkcyan;
     color: white;
-    border: 1px solid #047425;
+    border: 1px solid darkblue;
     cursor: pointer;
     transition: all 300ms;
+    text-decoration: none;
+    font-size: 12px;
 }
+a.button:hover,
 button:hover,
 input[type="submit"]:hover
+{
+    background: darkblue;
+}
+
+form button,
+form input[type="submit"]
+{
+    margin-top: 15px;
+    background-color: #00aa33;
+    border: 1px solid #047425;
+}
+form button:hover,
+form input[type="submit"]:hover
 {
     background: #047425;
 }
@@ -207,4 +223,23 @@ li.dropdown {
 }
 .dropdown:hover .dropdown-content {
     display: block;
+}
+
+
+
+
+
+
+/********* POR PAGINAS ***********/
+
+/* customer */
+table.customers th.acronym,
+table.customers_mine th.acronym {
+    width: 8em;
+}
+
+table.customers td.acronym,
+table.customers_mine td.acronym {
+    width: 6em;
+    text-align: center;
 }

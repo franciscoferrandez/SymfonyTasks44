@@ -1,11 +1,11 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Todos los usuarios{% endblock %}
+{% block title %}{% trans %}Users{% endtrans %}{% endblock %}
 
 {% block body %}
 
     <div class="example-wrapper">
-        <h2>Todos los usuarios ✅</h2>
+        <h2>{% trans %}Users{% endtrans %} ✅</h2>
 
         {{ include('includes/user-list.html.twig') }}
     </div>

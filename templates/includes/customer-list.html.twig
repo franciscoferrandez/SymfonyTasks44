@@ -1,0 +1,31 @@
+<table class="{{ current_route_name }}">
+    <tr>
+        <th class="name">{% trans %}Name{% endtrans %}</th>
+        <th class="acronym">{% trans %}Acronym{% endtrans %}</th>
+        <th class="actions">{% trans %}Actions{% endtrans %}</th>
+    </tr>
+
+    {% for customer in rows %}
+        <tr>
+            <td class="name">{{ customer.name|trim }}
+                {% if current_route_name != 'customers_mine'  %}
+                    <br/>
+                    <small>{{ customer.user.name }}</small>
+                {% endif %}
+            </td>
+            <td class="acronym">
+                {% if customer.acronym|length > 0 %}
+                <span style="font-width: bold; padding: 8px 12px; background-color: {{ customer.backColor }}; color: {{ customer.foreColor }}"> {{ customer.acronym }} </span>
+                {% endif %}
+            </td>
+            <td class="actions buttons">
+                {% if (app.user != null and customer.user.id == app.user.id) or (is_granted('ROLE_ADMIN')) %}
+                    <a href="{{ path('customer_edit', {'id':customer.id}) }}" class="btn-edit">{% trans %}Edit{% endtrans %}</a>
+                {% endif %}
+                {% if (app.user != null and customer.user.id == app.user.id) or (is_granted('ROLE_ADMIN')) %}
+                    <a href="{{ path('customer_delete', {'id':customer.id}) }}" class="btn-delete">{% trans %}Delete{% endtrans %}</a>
+                {% endif %}
+            </td>
+        </tr>
+    {% endfor %}
+</table>

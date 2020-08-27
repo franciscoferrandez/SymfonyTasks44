@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html>
 {% set current_route_name = app.request.attributes.get('_route') %}
+{% set current_locale = app.request.getLocale() %}
+{% set allowed_locales = ["en","es"] %}
 <head>
     <meta charset="UTF-8">
     <title>{% block title %}Welcome!{% endblock %}</title>
@@ -14,7 +16,7 @@
         <h1>Tareas Symfony <!-- ({{ current_route_name }}) --></h1>
         <ul id="menu">
             {% if app.user %}
-                <li><a href="{{ path("tasks_mine") }}">Mis Tareas</a></li>
+                <li><a href="{{ path("tasks_mine") }}">{% trans %}My Tasks{% endtrans %}</a></li>
                 <li><a href="{{ path("task_create") }}">+</a></li>
                 <!--
                 <li class="right"><a href="{{ path("logout") }}">Logout</a></li>
@@ -24,21 +26,26 @@
                 {% endif %}
                 <li class="right"><a href="{{ path('user_edit', {'id':app.user.id}) }}">{{ app.user.name }}</a></li>
                 -->
+                {{ include('includes/menu/language-switch.html.twig') }}
                 <li class="right dropdown">
                     <a href="{{ path('user_edit', {'id':app.user.id}) }}" class="dropbtn">{{ app.user.name }}</a>
                     <div class="dropdown-content">
+                        <a href="{{ path("customers_mine") }}">{% trans %}Customers{% endtrans %}</a>
+                        <hr/>
                         <a href="{{ path("user_password_change") }}">Password</a>
-                        <a href="{{ path("logout") }}">Logout</a>
+                        <a href="{{ path("logout") }}">{% trans %}Logout{% endtrans %}</a>
                         {% if is_granted('ROLE_ADMIN') %}
                             <hr/>
-                            <a href="{{ path("users") }}">Usuarios</a>
-                            <a href="{{ path("tasks") }}">Tareas</a>
+                            <a href="{{ path("users") }}">{% trans %}Users{% endtrans %}</a>
+                            <a href="{{ path("customers") }}">{% trans %}Customers{% endtrans %}</a>
+                            <a href="{{ path("tasks") }}">{% trans %}Tasks{% endtrans %}</a>
                         {% endif %}
                     </div>
                 </li>
             {% else %}
-                <li><a href="{{ path("login") }}">Login</a></li>
-                <li><a href="{{ path("register") }}">Registro</a></li>
+                <li><a href="{{ path("login") }}">{% trans %}Login{% endtrans %}</a></li>
+                <li><a href="{{ path("register") }}">{% trans %}Registration{% endtrans %}</a></li>
+                {{ include('includes/menu/language-switch.html.twig') }}
             {% endif %}
         </ul>
     </div>

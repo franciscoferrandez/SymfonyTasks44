@@ -20,7 +20,10 @@ use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 class UserController extends AbstractController
 {
     /**
-     * @Route("/backend/users", name="users")
+     * @Route({
+     *     "en": "/backend/users",
+     *     "es": "/backend/usuarios"
+     * }, name="users")
      */
     public function index()
     {
@@ -38,7 +41,10 @@ class UserController extends AbstractController
     }
 
     /**
-     * @Route("/registro", name="register")
+     * @Route({
+     *     "en": "/register",
+     *     "es": "/registro"
+     * }, name="register")
      */
     public function register(Request $request, UserPasswordEncoderInterface $encoder, CustomEmailService $customEmailService)
     {
@@ -68,7 +74,10 @@ class UserController extends AbstractController
 
 
     /**
-     * @Route("/backend/user/password-change", name="user_password_change")
+     * @Route({
+     *     "en": "/backend/user/password-change",
+     *     "es": "/backend/usuario/cambio-password"
+     * }, name="user_password_change")
      */
     public function passwordChange(Request $request, UserPasswordEncoderInterface $encoder)
     {
@@ -113,7 +122,10 @@ class UserController extends AbstractController
     }
 
     /**
-     * @Route("backend/user/edit/{id}", name="user_edit")
+     * @Route({
+     *     "en": "/backend/user/edit/{id}",
+     *     "es": "/backend/usuario/editar/{id}"
+     * }, name="user_edit")
      */
     public function edit(Request $request, UserInterface $user, User $user_edit)
     {
@@ -146,7 +158,10 @@ class UserController extends AbstractController
     }
 
     /**
-     * @Route("/backend/user/delete/{id}", name="user_delete")
+     * @Route({
+     *     "en": "/backend/user/delete/{id}",
+     *     "es": "/backend/usuario/borrar/{id}"
+     * }, name="user_delete")
      */
     public function delete(User $user_delete, UserInterface $user)
     {
@@ -164,7 +179,10 @@ class UserController extends AbstractController
     }
 
     /**
-     * @Route("/login", name="login")
+     * @Route({
+     *     "en": "/login",
+     *     "es": "/inicio-sesion"
+     * }, name="login")
      */
     public function login(AuthenticationUtils $au)
     {

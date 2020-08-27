@@ -2,11 +2,11 @@
 
 {% block title %}
     {% if current_route_name == 'user_edit' %}
-        Perfil de usuario
+        {% trans %}User Profile{% endtrans %}
     {% elseif current_route_name == 'user_password_change' %}
-        Cambio de contraseña
+        {% trans %}Change User Password{% endtrans %}
     {% else %}
-        Registro de usuarios
+        {% trans %}User Registration{% endtrans %}
     {% endif %}
 {% endblock %}
 
@@ -14,11 +14,11 @@
 <div class="example-wrapper">
     <h2>
         {% if current_route_name == 'user_edit' %}
-            Perfil de usuario
+            {% trans %}User Profile{% endtrans %}
         {% elseif current_route_name == 'user_password_change' %}
-            Cambio de contraseña
+            {% trans %}Change User Password{% endtrans %}
         {% else %}
-            Registro de usuarios
+            {% trans %}User Registration{% endtrans %}
         {% endif %}
         ✅</h2>
     {{ form_start(form) }}

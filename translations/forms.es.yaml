@@ -1,0 +1,37 @@
+Title: Título
+Name: Nombre
+Commercial Name: Nombre Comercial
+Surname: Apellidos
+Role: Rol
+Status: Estado
+Acronym: Acrónimo
+Priority: Prioridad
+Content: Contenido
+Hours: Horas
+Background Color: Color de Fondo
+Text Color: Color del Texto
+Password: Contraseña
+Current Password: Contraseña Actual
+Repeat Password: Confirme Contraseña
+New Password: Nueva Contraseña
+Repeat New Password: Confirme Nueva Contraseña
+
+# task
+statusInboxLabel: Inbox
+statusPendingLabel: Pendiente
+statusInProgressLabel: 'En Curso'
+statusRevisionLabel: Revisión
+statusCompletedLabel: Completada
+priorityHighLabel: Alta
+priorityMediumLabel: Media
+priorityLowLabel: Baja
+
+# user
+userRoleGuestLabel: Invitado
+userRoleUserLabel: Usuario
+userRoleAdminLabel: Administrador
+
+#botones
+Save: Guardar
+Register: Registrar
+Change password: Cambiar contraseña

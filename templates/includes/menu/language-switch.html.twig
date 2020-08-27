@@ -1,0 +1,11 @@
+{% set req = app.request %}
+{% for locale in allowed_locales %}
+    {% if locale != req.getLocale() %}
+        <li class="right"><a rel="alternate" hreflang="{{ locale }}" href="{{ absolute_url(
+                path(
+                    req.attributes.get('_route'),
+                    req.attributes.get('_route_params')|merge({'_locale': locale})
+                )
+            ) }}">{{ locale|upper }}</a></li>
+    {% endif %}
+{% endfor %}

@@ -2,9 +2,9 @@
 
 {% block title %}
     {% if current_route_name == 'tasks_mine' %}
-        Mis tareas
+        {% trans %}My Tasks{% endtrans %}
     {% else %}
-        Todas las tareas
+        {% trans %}Tasks{% endtrans %}
     {% endif %}
 {% endblock %}
 
@@ -12,9 +12,9 @@
 
 <div class="example-wrapper">
     <h2>{% if current_route_name == 'tasks_mine' %}
-            Mis tareas
+            {% trans %}My Tasks{% endtrans %}
         {% else %}
-            Todas las tareas
+            {% trans %}Tasks{% endtrans %}
         {% endif %} ✅</h2>
 
     {{ include('includes/tasks-list.html.twig') }}

@@ -17,7 +17,10 @@ use Symfony\Component\Security\Core\User\UserInterface;
 class TaskController extends AbstractController
 {
     /**
-     * @Route("/tasks", name="tasks")
+     * @Route({
+     *     "en": "/tasks",
+     *     "es": "/tareas"
+     * }, name="tasks")
      */
     public function index()
     {
@@ -47,7 +50,10 @@ class TaskController extends AbstractController
     }
 
     /**
-     * @Route("/tasks/mine", name="tasks_mine")
+     * @Route({
+     *     "en": "/tasks/mine",
+     *     "es": "/mis-tareas"
+     * }, name="tasks_mine")
      */
     public function myTasks(UserInterface $user)
     {
@@ -59,7 +65,10 @@ class TaskController extends AbstractController
     }
 
     /**
-     * @Route("/task/view/{id}", name="task")
+     * @Route({
+     *     "en": "/task/view/{id}",
+     *     "es": "/tarea/ver/{id}"
+     * }, name="task")
      */
     public function task(Task $task)
     {
@@ -73,7 +82,10 @@ class TaskController extends AbstractController
     }
 
     /**
-     * @Route("/task/create", name="task_create")
+     * @Route({
+     *     "en": "/task/create",
+     *     "es": "/tarea/crear"
+     * }, name="task_create")
      */
     public function create(Request $request, UserInterface $user)
     {
@@ -102,7 +114,10 @@ class TaskController extends AbstractController
     }
 
     /**
-     * @Route("/task/edit/{id}", name="task_edit")
+     * @Route({
+     *     "en": "/task/edit/{id}",
+     *     "es": "/tarea/editar/{id}"
+     * }, name="task_edit")
      */
     public function edit(Request $request, UserInterface $user, Task $task)
     {
@@ -136,7 +151,10 @@ class TaskController extends AbstractController
     }
 
     /**
-     * @Route("/task/delete/{id}", name="task_delete")
+     * @Route({
+     *     "en": "/task/delete/{id}",
+     *     "es": "/tarea/borrar/{id}"
+     * }, name="task_delete")
      */
     public function delete (Task $task, UserInterface $user) {
         if (!$task || !$user || ($user->getId() != $task->getUser()->getId())) {
@@ -148,7 +166,7 @@ class TaskController extends AbstractController
         $em->remove($task);
         $em->flush();
 
-        return $this->redirectToRoute("tasks");
+        return $this->redirectToRoute("tasks_mine");
 
     }
 }

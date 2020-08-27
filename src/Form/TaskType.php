@@ -7,41 +7,50 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class TaskType extends AbstractType {
 
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder->add("title", TextType::class, array(
-            "label" => "Título"
+            "label" => "Title"
         ));
         $builder->add("content", TextareaType::class, array(
-            "label" => "Contenido"
+            "label" => "Content"
         ));
         $builder->add("priority", ChoiceType::class, array(
-            "label" => "Prioridad",
+            "label" => "Priority",
             "choices" => array(
-                "Alta" => "HIGH",
-                "Media" => "MEDIUM",
-                "Baja" => "LOW",
+                "priorityHighLabel" => "HIGH",
+                "priorityMediumLabel" => "MEDIUM",
+                "priorityLowLabel" => "LOW",
             )
         ));
         $builder->add("status", ChoiceType::class, array(
-            "label" => "Estado",
+            "label" => "Status",
             "choices" => array(
-                "Inbox" => 0,
-                "Pendiente" => 10,
-                "En Curso" => 20,
-                "Revisión" => 30,
-                "Completado" => 40,
+                "statusInboxLabel" => 0,
+                "statusPendingLabel" => 10,
+                "statusInProgressLabel" => 20,
+                "statusRevisionLabel" => 30,
+                "statusCompletedLabel" => 40,
             )
         ));
         $builder->add("hours", TextType::class, array(
-            "label" => "Horas"
+            "label" => "Hours"
         ));
         $builder->add("submit", SubmitType::class, array(
-            "label" => "Guardar"
+            'translation_domain' => 'forms',
+            "label" => "Save"
         ));
+    }
+
+    public function configureOptions(OptionsResolver $resolver)
+    {
+        $resolver->setDefaults([
+            'translation_domain' => 'forms'
+        ]);
     }
 
 }

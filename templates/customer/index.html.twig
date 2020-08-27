@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    {% if current_route_name == 'customers_mine' %}
+        Mis clientes
+    {% else %}
+        Todos los clientes
+    {% endif %}
+{% endblock %}
+
+{% block body %}
+
+    <div class="example-wrapper">
+        <h2>{% if current_route_name == 'customers_mine' %}
+                {% trans %}My Customers{% endtrans %}
+            {% else %}
+                {% trans %}Customers{% endtrans %}
+            {% endif %} ✅<span class="right"><a href="{{ path("customer_create") }}" class="button">{% trans %}New{% endtrans %}</a> </span> </h2>
+
+        {{ include('includes/customer-list.html.twig') }}
+    </div>
+{% endblock %}

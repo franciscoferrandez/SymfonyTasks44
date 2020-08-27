@@ -15,10 +15,10 @@ class RegisterType extends AbstractType {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder->add("name", TextType::class, array(
-            "label" => "Nombre"
+            "label" => "Name"
         ));
         $builder->add("surname", TextType::class, array(
-            "label" => "Apellidos"
+            "label" => "Surname"
         ));
         $builder->add("email", EmailType::class, array(
             "label" => "Email"
@@ -28,11 +28,11 @@ class RegisterType extends AbstractType {
         ));
         if ($options['require_role']) {
             $builder->add("role", ChoiceType::class, array(
-                "label" => "Rol",
+                "label" => "Role",
                 "choices" => array(
-                    "Invitado" => "ROLE_GUEST",
-                    "Usuario" => "ROLE_USER",
-                    "Administrador" => "ROLE_ADMIN",
+                    "userRoleGuestLabel" => "ROLE_GUEST",
+                    "userRoleUserLabel" => "ROLE_USER",
+                    "userRoleAdminLabel" => "ROLE_ADMIN",
                 )
             ));
         }
@@ -45,8 +45,9 @@ class RegisterType extends AbstractType {
     {
         $resolver->setDefaults([
             // ...,
-            'submit_label' => "Registro",
+            'submit_label' => "Register",
             'require_role' => false,
+            'translation_domain' => 'forms'
         ]);
 
         // you can also define the allowed types, allowed values and

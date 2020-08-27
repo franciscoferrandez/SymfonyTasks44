@@ -1,10 +1,10 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Login de usuarios{% endblock %}
+{% block title %}{% trans %}User Login{% endtrans %}{% endblock %}
 
 {% block body %}
 <div class="example-wrapper">
-    <h2>Login de usuarios ✅</h2>
+    <h2>{% trans %}User Login{% endtrans %} ✅</h2>
 
     {% if error %}
         <div class="alert alert-error">
@@ -18,7 +18,8 @@
         <label for="password">Password</label>
         <input type="password" name="_password" id="password" />
         <div class="clearfix" />
-        <input type="submit" value="Login" />
+{#        <input type="submit" value="Login" />#}
+        <button type="submit" id="login_submit" name="login[submit]">Login</button>
     </form>
 </div>
 {% endblock %}

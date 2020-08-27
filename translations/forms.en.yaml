@@ -1,0 +1,11 @@
+statusInboxLabel: Inbox
+statusPendingLabel: Pending
+statusInProgressLabel: 'In Progress'
+statusRevisionLabel: Review
+statusCompletedLabel: Completed
+priorityHighLabel: High
+priorityMediumLabel: Medium
+priorityLowLabel: Low
+userRoleGuestLabel: Guest
+userRoleUserLabel: User
+userRoleAdminLabel: Administrator

@@ -22,7 +22,7 @@ class UserPasswordChangeType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder->add("old_password", PasswordType::class, array(
-            "label" => "Password actual",
+            "label" => "Current Password",
             "mapped" => false,
         ));
 
@@ -31,8 +31,8 @@ class UserPasswordChangeType extends AbstractType
             'invalid_message' => 'The password fields must match.',
             'options' => ['attr' => ['class' => 'password-field']],
             'required' => true,
-            'first_options' => ['label' => 'Password'],
-            'second_options' => ['label' => 'Repeat Password'],
+            'first_options' => ['label' => 'New Password'],
+            'second_options' => ['label' => 'Repeat New Password'],
             'constraints' => [
                 new NotBlank(),
                 new Length(['min' => 8]),
@@ -47,7 +47,8 @@ class UserPasswordChangeType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'submit_label' => "Cambiar password",
+            'submit_label' => "Change password",
+            'translation_domain' => 'forms'
         ]);
 
         // you can also define the allowed types, allowed values and

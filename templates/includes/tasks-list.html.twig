@@ -1,9 +1,9 @@
 <table>
     <tr>
-        <th>Tarea</th>
-        <th>Prioridad</th>
-        <th>Horas</th>
-        <th>Acciones</th>
+        <th>{% trans %}Task{% endtrans %}</th>
+        <th>{% trans %}Priority{% endtrans %}</th>
+        <th>{% trans %}Hours{% endtrans %}</th>
+        <th>{% trans %}Actions{% endtrans %}</th>
     </tr>
 
     {% for task in tasks %}
@@ -18,10 +18,10 @@
             <td>{{ task.priority }}</td>
             <td>{{ task.hours }}</td>
             <td class="buttons">
-                <a href="{{ path('task', {'id':task.id}) }}" class="btn-view">Ver</a>
+                <a href="{{ path('task', {'id':task.id}) }}" class="btn-view">{% trans %}View{% endtrans %}</a>
                 {% if (app.user != null and task.user.id == app.user.id) or (is_granted('ROLE_ADMIN')) %}
-                    <a href="{{ path('task_edit', {'id':task.id}) }}" class="btn-edit">Editar</a>
-                    <a href="{{ path('task_delete', {'id':task.id}) }}" class="btn-delete">Borrar</a>
+                    <a href="{{ path('task_edit', {'id':task.id}) }}" class="btn-edit">{% trans %}Edit{% endtrans %}</a>
+                    <a href="{{ path('task_delete', {'id':task.id}) }}" class="btn-delete">{% trans %}Delete{% endtrans %}</a>
                 {% endif %}
             </td>
         </tr>

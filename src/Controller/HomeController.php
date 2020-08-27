@@ -8,7 +8,10 @@ use Symfony\Component\Routing\Annotation\Route;
 class HomeController extends AbstractController
 {
     /**
-     * @Route("/", name="home")
+     * @Route({
+     *     "en": "/",
+     *     "es": "/inicio"
+     * }, name="home")
      */
     public function index()
     {
