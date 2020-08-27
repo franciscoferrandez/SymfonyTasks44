@@ -49,7 +49,9 @@ class UserController extends AbstractController
     public function register(Request $request, UserPasswordEncoderInterface $encoder, CustomEmailService $customEmailService)
     {
         $user = new User();
-        $form = $this->createForm(RegisterType::class, $user);
+        $form = $this->createForm(RegisterType::class, $user, array(
+            "isAdmin" => $this->isGranted('ROLE_ADMIN'),
+        ));
 
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
@@ -136,6 +138,8 @@ class UserController extends AbstractController
 
         $form = $this->createForm(RegisterType::class, $user_edit, array(
             "require_role" => $this->isGranted('ROLE_ADMIN'),
+            "isAdmin" => $this->isGranted('ROLE_ADMIN'),
+            "edit" => true,
             "submit_label" => "Guardar",
         ));
 

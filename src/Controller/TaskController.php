@@ -90,7 +90,11 @@ class TaskController extends AbstractController
     public function create(Request $request, UserInterface $user)
     {
         $task = new Task();
-        $form = $this->createForm(TaskType::class, $task);
+        $task->setUser($user);
+
+        $form = $this->createForm(TaskType::class, $task, array(
+            "isAdmin" => $this->isGranted('ROLE_ADMIN'),
+        ));
 
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
@@ -126,7 +130,9 @@ class TaskController extends AbstractController
             //return $this->redirectToRoute("tasks");
         }
 
-        $form = $this->createForm(TaskType::class, $task);
+        $form = $this->createForm(TaskType::class, $task, array(
+            "isAdmin" => $this->isGranted('ROLE_ADMIN'),
+        ));
 
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
