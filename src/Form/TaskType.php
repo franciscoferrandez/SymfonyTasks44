@@ -63,7 +63,7 @@ class TaskType extends AbstractType
             "label" => "Hours"
         ));
 
-        if (false && $options['isAdmin']) {
+        if ($options['isAdmin']) {
             $builder->add('user', EntityType::class, [
                 // looks for choices from this entity
                 'class' => User::class,
@@ -105,7 +105,7 @@ class TaskType extends AbstractType
             }
         );
 
-        if (true) {  // versión sin ajax
+        if (false) {  // versión sin ajax
 
         } else {
 
