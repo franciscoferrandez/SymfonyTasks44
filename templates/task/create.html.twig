@@ -21,4 +21,34 @@
     {{ form_widget(form) }}
     {{ form_end(form) }}
 </div>
+
+    <script>
+        var $task_user = $('#task_user');
+        var $task_token = $('#task__token');
+        // When sport gets selected ...
+        $task_user.change(function() {
+            // ... retrieve the corresponding form.
+            var $form = $(this).closest('form');
+            // Simulate form data, but only include the selected sport value.
+            var data = {};
+            data[$task_token.attr('name')] = $task_token.val();
+            data[$task_user.attr('name')] = $task_user.val();
+
+            // Submit data via AJAX to the form's action path.
+            $.ajax({
+                url : $form.attr('action'),
+                type: $form.attr('method'),
+                data : data,
+                success: function(html) {
+                    // Replace current position field ...
+                    $('#task_customer').replaceWith(
+                        // ... with the returned one from the AJAX response.
+                        $(html).find('#task_customer')
+                    );
+                    // Position field now displays the appropriate positions.
+                }
+            });
+        });
+    </script>
+
 {% endblock %}

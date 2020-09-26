@@ -134,20 +134,33 @@ class TaskController extends AbstractController
             "isAdmin" => $this->isGranted('ROLE_ADMIN'),
         ));
 
-        $form->handleRequest($request);
-        if ($form->isSubmitted() && $form->isValid()) {
-            //$task->setCreatedAt(new \DateTime());
-            //$task->setUser($user);
+        if (!$request->isXmlHttpRequest()) {
+            $form->handleRequest($request);
+            if ($form->isSubmitted() && $form->isValid()) {
+                //$task->setCreatedAt(new \DateTime());
+                //$task->setUser($user);
 
-            dump($task);
+                dump($task);
 
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($task);
-            $em->flush();
+                $em = $this->getDoctrine()->getManager();
+                $em->persist($task);
+                $em->flush();
 
-            return $this->redirect(
-                $this->generateUrl("task", ['id' => $task->getId()])
-            );
+                return $this->redirect(
+                    $this->generateUrl("task", ['id' => $task->getId()])
+                );
+            }
+        } else {
+
+            //dd($request->attributes);
+
+            $task = $request->attributes->get("task");
+            $task->setUser($this->getDoctrine()
+                ->getRepository(User::class)
+                ->find(7));
+            $request->attributes->set("task", $task);
+
+            dd($request->attributes);
         }
 
         return $this->render('task/create.html.twig', array(
@@ -173,6 +186,18 @@ class TaskController extends AbstractController
         $em->flush();
 
         return $this->redirectToRoute("tasks_mine");
+
+    }
+
+    /**
+     * @Route("/task/json", name="task_json")
+     */
+    public function task_json (UserInterface $user) {
+
+        return $this->json([
+            "name" => $user->getName(),
+            "surname" => $user->getSurname(),
+        ]);
 
     }
 }

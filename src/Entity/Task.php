@@ -73,6 +73,11 @@ class Task
      */
     private $status = 0;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Customer::class, inversedBy="tasks")
+     */
+    private $customer;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -158,6 +163,18 @@ class Task
     public function setStatus(int $status): self
     {
         $this->status = $status;
+
+        return $this;
+    }
+
+    public function getCustomer(): ?Customer
+    {
+        return $this->customer;
+    }
+
+    public function setCustomer(?Customer $customer): self
+    {
+        $this->customer = $customer;
 
         return $this;
     }
