@@ -3,7 +3,10 @@
 namespace App\Entity;
 
 use App\Repository\VenueRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=VenueRepository::class)
@@ -19,6 +22,11 @@ class Venue
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\Length(
+     *      min = 2,
+     *      max = 100,
+     *      allowEmptyString = false
+     * )
      */
     private $name;
 
