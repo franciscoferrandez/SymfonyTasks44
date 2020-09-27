@@ -115,16 +115,6 @@ class TaskType extends AbstractType
                     FormEvents::POST_SUBMIT,
                     function (FormEvent $event) use ($formModifier) {
 
-//                    $form = $event->getForm();
-//                    $data = $form->getData();
-//
-//                    $form->getParent()->add('customer', EntityType::class, [
-//                        'class' => Customer::class,
-//                        'placeholder' => '',
-//                        'choices' => $data->getCustomers(),
-//                        'choice_label' => 'name'
-//                    ]);
-
                         // --------------------------
                         // It's important here to fetch $event->getForm()->getData(), as
                         // $event->getData() will get you the client data (that is, the ID)

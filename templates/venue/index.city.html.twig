@@ -1,0 +1,46 @@
+{% extends 'base.html.twig' %}
+{% set titulo = (list is defined) ? "Cities" : ((form.vars.value.id is not null) ? "Edit City" : "New City") %}
+{% block title %}
+        {{ (titulo)|trans }}
+{% endblock %}
+
+{% block body %}
+<style>
+    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
+    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
+</style>
+
+<div class="example-wrapper">
+
+    <h2>{{ (titulo)|trans }} ✅ <span class="right"><a href="{{ path("city") }}" class="button">{% trans %}New{% endtrans %}</a> </span> </h2>
+
+    {% if list is defined %}
+        {{ include('includes/city-list.html.twig') }}
+    {% else %}
+        {{ form_start(form) }}
+        {{ form_widget(form) }}
+        {# ... #}
+        {{ form_end(form) }}
+
+        {# {{ dump(form.vars.value) }} #}
+        <script>
+            var $region = $('#venue_region');
+            $region.change(function() {
+                var $form = $(this).closest('form');
+                var data = {};
+                data[$region.attr('name')] = $region.val();
+                $.ajax({
+                    url : $form.attr('action'),
+                    type: $form.attr('method'),
+                    data : data,
+                    success: function(html) {
+                        $('#venue_city').replaceWith(
+                            $(html).find('#venue_city')
+                        );
+                    }
+                });
+            });
+        </script>
+    {% endif %}
+</div>
+{% endblock %}
