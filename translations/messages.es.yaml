@@ -14,6 +14,8 @@ New: Nuevo
 'New Task': 'Nueva Tarea'
 'Edit Venue': 'Editar Lugar'
 'New Venue': 'Nuevo Lugar'
+'New Region': 'Nueva Región'
+'New City': 'Nueva Ciudad'
 Task: Tarea
 'User Login': 'Inicio de Sesión'
 'User Profile': 'Perfil de Usuario'
@@ -28,4 +30,9 @@ Delete: Borrar
 Name: Nombre
 Acronym: Acrónimo
 Role: Rol
-Email: __Email
+Email: Email
+Venues: Lugares
+Regions: Regiones
+Cities: Ciudades
+Region: Región
+City: Ciudad
