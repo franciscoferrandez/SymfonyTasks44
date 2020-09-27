@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Venue;
 use App\Form\VenueType;
+use App\Repository\VenueRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
@@ -11,12 +12,21 @@ use Symfony\Component\Routing\Annotation\Route;
 class VenueController extends AbstractController
 {
     /**
-     * @Route("/venue", name="venue")
+     * @Route("/venue/{id}", name="venue", defaults={"id": null})
+     * @param Request $request
+     * @param VenueRepository $venueRepository
+     * @param null $venue_id
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      */
-    public function index(Request $request)
+    public function index(Request $request, VenueRepository $venueRepository, Venue $venue = null)
     {
 
-        $venue = new Venue();
+        if (null == $venue) {
+            $venue = new Venue();
+        }
+//        } else {
+//            $venue = $venueRepository->find($venue_id);
+//        }
 
         $form = $this->createForm(VenueType::class, $venue, array(
             "isAdmin" => $this->isGranted('ROLE_ADMIN'),

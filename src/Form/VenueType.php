@@ -56,6 +56,12 @@ class VenueType extends AbstractType
             ])
             ->add('city');
 
+
+        $builder->add("submit", SubmitType::class, array(
+            'translation_domain' => 'forms',
+            "label" => "Save"
+        ));
+
         $formModifier = function (FormInterface $form, Region $region = null) {
             $cities = null === $region ? array() : $region->getCities();
 
