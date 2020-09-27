@@ -43,7 +43,7 @@ class VenueType extends AbstractType
             "label" => "Name"
         ))
             ->add('region', EntityType::class, [
-                'label' => 'Region *',
+                'label' => 'Region',
                 'class'         => Region::class,
                 'choice_label'  => 'name',
                 'choices' => $regions,
@@ -69,8 +69,10 @@ class VenueType extends AbstractType
                 'class' => City::class,
                 'placeholder' => '',
                 'choices' => $cities,
-                'label' => 'Ville *',
+                'label' => 'City',
                 'choice_label'  => 'name',
+                'empty_data' => null,
+                'required' => false,
             ));
         };
 
@@ -78,7 +80,7 @@ class VenueType extends AbstractType
             FormEvents::PRE_SET_DATA,
             function (FormEvent $event) use ($formModifier) {
                 $data = $event->getData();
-                $formModifier($event->getForm(), $data->getCity());
+                $formModifier($event->getForm(), $data->getRegion());
             }
         );
 

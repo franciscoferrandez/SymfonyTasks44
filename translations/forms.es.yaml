@@ -26,6 +26,10 @@ priorityHighLabel: Alta
 priorityMediumLabel: Media
 priorityLowLabel: Baja
 
+# venue
+Region: Región
+City: Ciudad
+
 # user
 userRoleGuestLabel: Invitado
 userRoleUserLabel: Usuario

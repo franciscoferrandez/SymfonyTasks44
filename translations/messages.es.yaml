@@ -3,6 +3,7 @@ Customers: Clientes
 Logout: 'Cerrar Sesión'
 Users: Usuarios
 Tasks: Tareas
+Venue: Lugar
 Login: Login
 Registration: Registro
 'Edit Customer': 'Editar Cliente'
@@ -11,6 +12,8 @@ Registration: Registro
 New: Nuevo
 'Edit Task': 'Editar Tarea'
 'New Task': 'Nueva Tarea'
+'Edit Venue': 'Editar Lugar'
+'New Venue': 'Nuevo Lugar'
 Task: Tarea
 'User Login': 'Inicio de Sesión'
 'User Profile': 'Perfil de Usuario'
@@ -25,3 +28,4 @@ Delete: Borrar
 Name: Nombre
 Acronym: Acrónimo
 Role: Rol
+Email: __Email

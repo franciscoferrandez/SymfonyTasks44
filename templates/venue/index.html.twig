@@ -1,6 +1,8 @@
 {% extends 'base.html.twig' %}
-
-{% block title %}Hello VenueController!{% endblock %}
+{% set titulo = (form.vars.value.id is not null) ? "Edit Venue" : "New Venue" %}
+{% block title %}
+        {{ (titulo)|trans }}
+{% endblock %}
 
 {% block body %}
 <style>
@@ -9,10 +11,15 @@
 </style>
 
 <div class="example-wrapper">
+
+    <h2>{{ (titulo)|trans }} ✅</h2>
+
     {{ form_start(form) }}
     {{ form_widget(form) }}
     {# ... #}
     {{ form_end(form) }}
+
+    {# {{ dump(form.vars.value) }} #}
     <script>
         var $region = $('#venue_region');
         $region.change(function() {

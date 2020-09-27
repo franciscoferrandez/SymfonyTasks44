@@ -9,10 +9,16 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
+/**
+ * @Route("/backend")
+ */
 class VenueController extends AbstractController
 {
     /**
-     * @Route("/venue/{id}", name="venue", defaults={"id": null})
+     * @Route({
+     *     "en": "/venue/{id}",
+     *     "es": "/lugar/{id}"
+     * }, name="venue", defaults={"id": null})
      * @param Request $request
      * @param VenueRepository $venueRepository
      * @param null $venue_id
@@ -20,6 +26,7 @@ class VenueController extends AbstractController
      */
     public function index(Request $request, VenueRepository $venueRepository, Venue $venue = null)
     {
+        $this->denyAccessUnlessGranted('ROLE_ADMIN');
 
         if (null == $venue) {
             $venue = new Venue();
