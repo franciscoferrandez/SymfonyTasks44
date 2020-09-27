@@ -1,0 +1,25 @@
+<table>
+    <tr>
+        <th>{% trans %}Venue{% endtrans %}</th>
+        <th>{% trans %}Region{% endtrans %}</th>
+        <th>{% trans %}City{% endtrans %}</th>
+        <th>{% trans %}Actions{% endtrans %}</th>
+    </tr>
+
+    {% for venue in venues %}
+        <tr>
+            <td>
+                {{ venue.name }}
+            </td>
+            <td>{{ (venue.region is null ? "" : venue.region.name) }}</td>
+            <td>{{ (venue.city is null ? "" : venue.city.name) }}</td>
+            <td class="buttons">
+                <a href="{{ path('venue', {'id':venue.id}) }}" class="btn-view">{% trans %}View{% endtrans %}</a>
+                {% if (is_granted('ROLE_ADMIN')) %}
+                    <a href="{{ path('venue', {'id':venue.id}) }}" class="btn-edit">{% trans %}Edit{% endtrans %}</a>
+                    {# <a href="{{ path('venue_delete', {'id':venue.id}) }}" class="btn-delete">{% trans %}Delete{% endtrans %}</a> #}
+                {% endif %}
+            </td>
+        </tr>
+    {% endfor %}
+</table>

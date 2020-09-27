@@ -1,5 +1,5 @@
 {% extends 'base.html.twig' %}
-{% set titulo = (list is defined) ? "Venues" : ((form.vars.value.id is not null) ? "Edit Venue" : "New Venue") %}
+{% set titulo = (list is defined) ? "Regions" : ((form.vars.value.id is not null) ? "Edit Region" : "New Region") %}
 {% block title %}
         {{ (titulo)|trans }}
 {% endblock %}
@@ -12,10 +12,10 @@
 
 <div class="example-wrapper">
 
-    <h2>{{ (titulo)|trans }} ✅ <span class="right"><a href="{{ path("venue") }}" class="button">{% trans %}New{% endtrans %}</a> </span> </h2>
+    <h2>{{ (titulo)|trans }} ✅ <span class="right"><a href="{{ path("region") }}" class="button">{% trans %}New{% endtrans %}</a> </span> </h2>
 
     {% if list is defined %}
-        {{ include('includes/venue-list.html.twig') }}
+        {{ include('includes/region-list.html.twig') }}
     {% else %}
         {{ form_start(form) }}
         {{ form_widget(form) }}
